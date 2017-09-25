@@ -22,6 +22,8 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
     
+    printf("%s\n", table[0][0]);
+    
     printTable(table, row);
     
     return 0;
