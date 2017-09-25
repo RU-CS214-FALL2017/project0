@@ -9,9 +9,9 @@ void printTable (char *** table, int lastRowIndex);
 int main(int argc, const char * argv[]) {
     
     char fun[4096];
-    fgets(fun, 4096, stdin);
-    
-    printf("%s\n", fun);
+    while(fgets(fun, 4096, stdin) != NULL) {
+        printf("%s\n", fun);
+    }
 
 //    char *** table = (char ***) malloc(4194304 * sizeof(char **));
 //    char line[4096];
