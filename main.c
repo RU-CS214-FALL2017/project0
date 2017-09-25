@@ -8,8 +8,8 @@ void printTable (char *** table, int lastRowIndex);
 
 int main(int argc, const char * argv[]) {
     
-    char fun[20];
-    fgets(fun, 20, stdin);
+    char fun[4096];
+    fgets(fun, 4096, stdin);
     
     printf("%s\n", fun);
 
