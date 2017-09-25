@@ -9,11 +9,11 @@ void printTable (char *** table, int lastRowIndex);
 int main(int argc, const char * argv[]) {
 
     char *** table = (char ***) malloc(4194304 * sizeof(char **));
-    char line[4098];
+    char line[4096];
     int row = 0;
-    
-    while(gets(line) != NULL) {
+    while(!feof(stdin)) {
         
+        fgets(line, 4096, stdin);
         table[row] = tokenizeRow(line);
         row += 1;
     }
