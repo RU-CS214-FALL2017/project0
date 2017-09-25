@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
     
-    
+    printTable(table, row);
     
     return 0;
 }
