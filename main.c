@@ -4,6 +4,8 @@
 
 #include "tools.h"
 
+void printTable (char *** table, int lastRowIndex);
+
 int main(int argc, const char * argv[]) {
 
     char *** table = (char ***) malloc(4194304 * sizeof(char **));
@@ -20,6 +22,14 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
     
+    
+    
     return 0;
 }
 
+void printTable (char *** table, int lastRowIndex) {
+    
+    for(int i = 0; i <= lastRowIndex; i++) {
+        printf("%s\n", table[i][1]);
+    }
+}
