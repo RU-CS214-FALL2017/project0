@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
 
     printf("ass nigga\n");
 
-    printf("%s\n", table[0][0]);
+//    printf("%s\n", table[0][1]);
 
     printTable(table, row);
 

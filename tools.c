@@ -46,18 +46,17 @@ char ** tokenizeRow(const char * line) {
         }
     }
     
-    if(realloc(ret, i * sizeof(char *)) == NULL) {
-        return NULL;
-    }
     
-    return ret;
+    
+    return (char **) realloc(ret, i * sizeof(char *));
 }
 
 void trim (char * str) {
     
     int i = 0;
     
-    while(str[i] == ' ' || str[i] == '\n' || str[i] == '\t') {
+    while(str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\r' || str[i] == '\v'
+          || str[i] == '\f') {
         i += 1;
     }
     
@@ -66,7 +65,8 @@ void trim (char * str) {
     unsigned long terminatingIndex = strlen(str);
     unsigned long j = terminatingIndex - 1;
     
-    while(str[j] == ' ' || str[j] == '\n' || str[j] == '\t') {
+    while(str[j] == ' ' || str[j] == '\n' || str[j] == '\t' || str[j] == '\r' || str[j] == '\v'
+          || str[j] == '\f') {
         j -= 1;
     }
     
