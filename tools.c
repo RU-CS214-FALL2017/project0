@@ -3,14 +3,14 @@
 
 #include "tools.h"
 
-char ** tokenizeRow(const char * line) {
+unsigned int tokenizeRow(const char * line, char *** row) {
     
-    char ** ret = (char **) malloc(strlen(line) * sizeof(char *));
+    *row = (char **) malloc(strlen(line) * sizeof(char *));
     
     char tempChar = '\0';
     char tempCell[4096];
-    int i = 0;
-    int j = 0;
+    int i = 0; // number of columns
+    int j = 0; // number of characters in column field
     int inQuote = 0;
     int outQuote = 0;
     
@@ -22,8 +22,8 @@ char ** tokenizeRow(const char * line) {
             
             tempCell[j] = '\0';
             trim(tempCell);
-            ret[i] = (char *) malloc(strlen(tempCell) * sizeof(char) + 1);
-            strcpy(ret[i], tempCell);
+            (*row)[i] = (char *) malloc(strlen(tempCell) * sizeof(char) + 1);
+            strcpy((*row)[i], tempCell);
             
             j = 0;
             i += 1;
@@ -45,10 +45,10 @@ char ** tokenizeRow(const char * line) {
             }
         }
     }
+
+    *row = (char **) realloc(*row, i * sizeof(char *));
     
-    
-    
-    return (char **) realloc(ret, i * sizeof(char *));
+    return i;
 }
 
 void trim (char * str) {
