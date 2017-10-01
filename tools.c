@@ -1,9 +1,10 @@
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "tools.h"
 
-unsigned int tokenizeRow(const char * line, char *** row) {
+unsigned int tokenizeRow(const char * line, char * ** row) {
     
     *row = (char **) malloc(strlen(line) * sizeof(char *));
     
@@ -45,7 +46,7 @@ unsigned int tokenizeRow(const char * line, char *** row) {
             }
         }
     }
-
+    
     *row = (char **) realloc(*row, i * sizeof(char *));
     
     return i;
@@ -81,4 +82,88 @@ void removeChars (char * str, unsigned long startIndex, unsigned long endIndex) 
         
         str[startIndex + i] = str[endIndex + i];
     }
+}
+
+void fillTable(FILE * csvFile, char * *** table, unsigned int * rows, unsigned int * columns) {
+    
+    *table = (char ***) malloc(4194304 * sizeof(char **));
+    char line[4096];
+    *rows = 0;
+    *columns = 0;
+    
+    while(fgets(line, 4096, csvFile) != NULL) {
+        
+        if (*rows == 0) {
+            
+            *columns = tokenizeRow(line, &(*table)[*rows]);
+            (*rows)++;
+            
+        } else if (tokenizeRow(line, &(*table)[*rows]) == *columns) {
+            (*rows)++;
+            
+        } else {
+            free(table[*rows]);
+        }
+    }
+    
+    *table = (char ***) realloc(*table, sizeof(char **) * *rows);
+}
+
+void printTable (char *** table, unsigned int rows, unsigned int columns) {
+    
+    for (int i = 0; i < rows; i++) {
+        
+        if(strchr(table[i][0], ',') != NULL) {
+            printf("\"%s\"", table[i][0]);
+            
+        } else {
+            printf("%s", table[i][0]);
+        }
+        
+        for (int j = 1; j < columns; j++) {
+            
+            if(strchr(table[i][j], ',') != NULL) {
+                printf(",\"%s\"", table[i][j]);
+                
+            } else {
+                printf(",%s", table[i][j]);
+            }
+        }
+        
+        printf("\n");
+    }
+}
+
+int isNumber(const char * str) {
+    
+    for (int i = 0; i < strlen(str); i++) {
+        
+        if (!(isdigit(str[i]) || (str[i] == '.'))) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int isXBeforeY (const char * x, const char * y, int areNumbers) {
+    
+    if (areNumbers) {
+        return atof(x) <= atof(y);
+        
+    } else {
+        return (strcmp(x, y) <= 0);
+    }
+}
+
+int isNumericColumn(char *** table, int rows, int columnIndex) {
+    
+    for (int i = 1; i < rows; i++) {
+        
+        if (!isNumber(table[i][columnIndex])) {
+            return 0;
+        }
+    }
+    
+    return 1;
 }
