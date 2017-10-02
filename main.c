@@ -34,7 +34,7 @@ int main(int argc, const char * argv[]) {
     
                 } else {
                     
-                    perror("Specified Column header not found");
+                    perror("Specified column header not found");
                     exit(EXIT_FAILURE);
                 }
                 
