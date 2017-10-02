@@ -2,14 +2,18 @@
 #include <stdlib.h>
 
 #include "tools.h"
+#include "sorter.h"
 
-void mergeSort(char * *** table, const unsigned int columnIndex, const int areNumbers,
-               const unsigned int start, const unsigned int end);
-
-void merge(char * *** table, const unsigned int columnIndex, const int areNumbers,
+// Merges sub rows from <table>, where subrows1 is from row at index <start>
+// inclusive to row at index <mid> exclusive, and subrows2 is from row at
+// index <mid> inclusive to row at index <end> exclusive. As the sub rows
+// merge, they are sorted ascendingly according to the column at index
+// <columnIndex>. If areNumbers is set to 0, the sort is done numerically
+// otherwise it is done lexicographically.
+void merge(char *** table, const unsigned int columnIndex, const int areNumbers,
            const unsigned int start, const unsigned int mid,  const unsigned int end);
 
-int sortTableByColumn(const char * columnHeader, char * *** table,
+int sortByHeader(const char * columnHeader, char *** table,
                       const unsigned int rows, const unsigned int columns) {
     
     unsigned int columnIndex = 0;
@@ -17,7 +21,7 @@ int sortTableByColumn(const char * columnHeader, char * *** table,
     
     for (int i = 0; i < columns; i++) {
         
-        if (!strcmp((*table)[0][i], columnHeader)) {
+        if (!strcmp((table)[0][i], columnHeader)) {
             
             columnIndex = i;
             found = 1;
@@ -27,7 +31,7 @@ int sortTableByColumn(const char * columnHeader, char * *** table,
     
     if (found) {
         
-        mergeSort(table, columnIndex, isNumericColumn(*table, rows, columnIndex), 1, rows);
+        mergeSort(table, columnIndex, isNumericColumn(table, rows, columnIndex), 1, rows);
         return found;
         
     } else {
@@ -35,9 +39,7 @@ int sortTableByColumn(const char * columnHeader, char * *** table,
     }
 }
 
-//start inclusive
-//end exclusive
-void mergeSort(char * *** table, const unsigned int columnIndex, const int areNumbers,
+void mergeSort(char *** table, const unsigned int columnIndex, const int areNumbers,
                const unsigned int start, const unsigned int end) {
     
     if ((end - start) > 1 ) {
@@ -51,7 +53,7 @@ void mergeSort(char * *** table, const unsigned int columnIndex, const int areNu
     }
 }
 
-void merge(char * *** table, const unsigned int columnIndex, const int areNumbers,
+void merge(char *** table, const unsigned int columnIndex, const int areNumbers,
            const unsigned int start, const unsigned int mid,  const unsigned int end) {
     
     char ** temp[end - start];
@@ -61,14 +63,14 @@ void merge(char * *** table, const unsigned int columnIndex, const int areNumber
 
     while(s < mid && m < end) {
         
-        if(isXBeforeY((*table)[s][columnIndex], (*table)[m][columnIndex], areNumbers)) {
+        if(isXBeforeY((table)[s][columnIndex], (table)[m][columnIndex], areNumbers)) {
             
-            temp[i] = (*table)[s];
+            temp[i] = (table)[s];
             s++;
             
         } else {
             
-            temp[i] = (*table)[m];
+            temp[i] = (table)[m];
             m++;
         }
         
@@ -77,14 +79,14 @@ void merge(char * *** table, const unsigned int columnIndex, const int areNumber
     
     while (s < mid) {
         
-        temp[i] = (*table)[s];
+        temp[i] = (table)[s];
         s++;
         i++;
     }
     
     while (m < end) {
         
-        temp[i] = (*table)[m];
+        temp[i] = (table)[m];
         m++;
         i++;
     }
@@ -93,7 +95,7 @@ void merge(char * *** table, const unsigned int columnIndex, const int areNumber
     
     for (int j = 0; j < i; j++) {
         
-        (*table)[s] = temp[j];
+        (table)[s] = temp[j];
         s++;
     }
 }

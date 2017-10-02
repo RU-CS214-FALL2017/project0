@@ -32,7 +32,14 @@ void printTable (char *** table, unsigned int rows, unsigned int columns);
 
 // Returns 1 if <str> is a valid number, else returns 0.
 int isNumber(const char * str);
+
+// If <areNumbers> is set to 0, returns 0 if <y> is lexicographically before <x>,
+// else returns 1. If <areNumbers> is set to anything besides 0, converts <x> and
+// <y> to double values x y respectively, and returns x <= y.
 int isXBeforeY (const char * x, const char * y, int areNumbers);
+
+// If all the values in <table> at column index <columnIndex> from row index 1
+// to row index <rows> - 1 are valid numbers, returns 1, else returns 0.
 int isNumericColumn(char *** table, int rows, int columnIndex);
 
 #endif /* tools_h */
