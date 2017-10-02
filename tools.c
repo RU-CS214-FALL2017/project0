@@ -93,16 +93,23 @@ void fillTable(FILE * csvFile, char * *** table, unsigned int * rows, unsigned i
     
     while(fgets(line, 4096, csvFile) != NULL) {
         
+        int tempColumns = tokenizeRow(line, &(*table)[*rows]);
+        
         if (*rows == 0) {
             
-            *columns = tokenizeRow(line, &(*table)[*rows]);
+            *columns = tempColumns;
             (*rows)++;
             
-        } else if (tokenizeRow(line, &(*table)[*rows]) == *columns) {
+        } else if (tempColumns == *columns) {
             (*rows)++;
             
         } else {
-            free(table[*rows]);
+            
+            for (int j = 0; j < tempColumns; j++) {
+                free((*table)[*rows][j]);
+            }
+            
+            free((*table)[*rows]);
         }
     }
     

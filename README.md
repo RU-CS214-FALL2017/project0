@@ -3,6 +3,7 @@ Assumptions
 *	Csv (comma seperated values) formatted file passed in through stdin.
 *	First row contains headers.
 *	All rows contain the same number of columns.
+*	Rows must be seperated with '\n' newline character.
 
 
 CLI Usage
