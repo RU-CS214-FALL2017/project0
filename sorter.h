@@ -14,3 +14,5 @@ void mergeSort(char *** table, const unsigned int columnIndex, const int areNumb
                  const unsigned int start, const unsigned int end);
 
 #endif /* sorter_h */
+
+fuck you bitch
