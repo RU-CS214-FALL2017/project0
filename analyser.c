@@ -22,7 +22,7 @@ void saveFunFact(FunFact * funFacts, int * elements, char *** table, const unsig
 void analize(char *** table, const unsigned int rows, const unsigned int columns) {
     
     FunFact top[columns];
-    char topRelatives[columns][4096];
+    char topRelatives[columns][4096];hjh
     int topElms = 0;
     
     FunFact bottom[columns];
