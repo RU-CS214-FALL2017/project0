@@ -9,6 +9,9 @@
 // <columns> columns from the heap.
 void freeTable(char * *** table, int rows, int columns);
 
+hell yeah pussy
+ass bitch nigga
+
 int main(int argc, const char * argv[]) {
 
     for (int i = 0; i < argc; i++) {
