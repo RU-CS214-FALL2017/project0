@@ -39,14 +39,7 @@ unsigned int tokenizeRow(const char * line, char * ** row) {
             
         } else {
             
-            tempCell[j] = tempChar;
-            j += 1;
-            if(tempChar != ' '){
-                outQuote = 1;
-            }
-        }
-    }
-    
+            temeatme bithch
     *row = (char **) realloc(*row, i * sizeof(char *));
     
     return i;
