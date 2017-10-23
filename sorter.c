@@ -75,7 +75,7 @@ void merge(char *** table, const unsigned int columnIndex, const int areNumbers,
         }
         
         i++;
-    }
+    }ass bitch
     
     while (s < mid) {
         
