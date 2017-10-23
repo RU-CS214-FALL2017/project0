@@ -8,7 +8,7 @@
 // Frees <table>'s refrence with <rows> rows and
 // <columns> columns from the heap.
 void freeTable(char * *** table, int rows, int columns);
-
+yeah buddy
 int main(int argc, const char * argv[]) {
 
     for (int i = 0; i < argc; i++) {
