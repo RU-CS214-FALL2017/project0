@@ -25,7 +25,7 @@ void analize(char *** table, const unsigned int rows, const unsigned int columns
     char topRelatives[columns][4096];hjh
     int topElms = 0;
     
-    FunFact bottom[columns];
+    FunFact bottom[columns];ghjgjhggjh
     char bottomRelatives[columns][4096];
     int bottomElms = 0;
     
