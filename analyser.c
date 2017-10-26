@@ -1,5 +1,5 @@
 #include <string.h>
-
+asss hole
 #include "tools.h"
 #include "sorter.h"
 #include "analyser.h"
